@@ -30,18 +30,26 @@ DISCLAIMER: I haven't tested it on windows at all.
 to run it, do:
 ```bash
 source .venv/bin/activate # if it isn't already activated
+# venv\Scripts\activate.ps1 # for windows + powershell
 python sliced_llama_server.py
 ```
 This starts the inference server and the webUI. There, you can load models, adjust parameters and do inference.
+You can also use command line arguments, e.g.:
+```
+python sliced_llama_server.py --model ~/path/to/llm-model-exl2/ --context-size 2048 --slices "0-24, 8-32"
+```
 
-You can also connecct the server to a different UI, like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
+As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
 
 For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint. 
 
 ## TODO / missing features:
 - configuration file
+- LoRA support
+- Classifier Free Guidance
 - OpenAI API:
   - chat completion currently only supports ChatML and only works with streaming
   - `presency_penalty` and `frequency_penalty` aren't supported
   - authentication
   - usage statistics
+- compatibility with TabbyAPI
