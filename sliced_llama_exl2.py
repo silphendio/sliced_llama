@@ -57,7 +57,7 @@ class SlicedLLamaExl2(SlicedLLama):
 
 
         self.tokenizer = ExLlamaV2Tokenizer(self.config)
-        self.generator = ExLlamaV2StreamingGenerator2(self.model, self.cache, self.tokenizer)
+        self.generator = ExLlamaV2StreamingGenerator(self.model, self.cache, self.tokenizer)
         self.gen_settings = ExLlamaV2Sampler.Settings()
 
 
@@ -86,7 +86,7 @@ class SlicedLLamaExl2(SlicedLLama):
         self.model.cache_map = {}
         self.model.set_cache_map()
         self.cache = Cache(self.model)
-        self.generator = ExLlamaV2StreamingGenerator2(self.model, self.cache, self.tokenizer)
+        self.generator = ExLlamaV2StreamingGenerator(self.model, self.cache, self.tokenizer)
         self.generator.set_stop_conditions([self.tokenizer.eos_token_id])
         print("layers sucessfully rearranged!")
         ids = [id(x) for x in self.cache.key_states]
