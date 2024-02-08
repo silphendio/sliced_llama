@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Sliced Llama WebUI</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+.drop_zone {
+  border: 5px solid blue;
+  width: 150px;
+  height: 50px;
+}
+.drop_zone_dragover {
+  border: 5px solid green;
+  width: 150px;
+  height: 50px;
+}
+
+    </style>
+    <script src="script.js"></script>
+  </head>
+  <body>
+    <div class="config">
+      <div class="model-loader">
+        <input type="text" id="model_file" name="model file" placeholder="Choose LLM Model Folder">
+        <div
+          id="drop_zone"
+          class="drop_zone"
+          ondrop="dropHandler(event);"
+          ondragover="dragOverHandler(event);"
+          ondragleave="dragLeaveHandler(event)">
+          <p>Or drag it here...</p>
+        </div>
+        <div>
+          Layer slices:
+          <input type="text" id="layers", placeholder="0-14,8-22">
+          <button>update</button>
+        </div>
+        <div>token_repetition_penalty: <input type="text" id="token_repetition_penalty"></div>
+        <div>token_repetition_range: <input type="text" id="token_repetition_range"></div>
+        <div>token_repetition_decay: <input type="text" id="token_repetition_decay"></div>
+        <hr>
+        <div>temperature: <input type="text" id="temperature"></div>
+        <div>top_k: <input type="text" id="top_k"></div>
+        <div>top_p: <input type="text" id="top_p"></div>
+        <div>min_p: <input type="text" id="min_p"></div>
+        <div>tfs: <input type="text" id="tfs"></div>
+        <div>typical: <input type="text" id="typical"></div>
+        <hr>
+        <div>mirostat: <input type="checkbox" id="mirostat"></div>
+        <div>mirostat_tau: <input type="text" id="mirostat_tau"></div>
+        <div>mirostat_eta: <input type="text" id="mirostat_eta"></div>
+        <hr>
+        <div>token_bias: <input type="text" id="token_bias"></div>
+        <div>filters: <input type="text" id="filters"></div>
+
+
+      </div>
+    </div>
+    <div class="lmm_text">
+      input type=<textarea name="" id="" cols="30" rows="10"></textarea>
+    </div>
+
+    <script>
+function e(id){ return document.getElementById(id) }
+
+function dropHandler(event) {
+  event.preventDefault();
+  e("drop_zone").classList = ["drop_zone"]
+
+  const filename = event.dataTransfer
+  console.log(filename)
+  e('model_file').value = filename
+}
+function dragOverHandler(event){
+  event.preventDefault()
+  e("drop_zone").classList = ["drop_zone_dragover"]
+}
+function dragLeaveHandler(event){
+  e("drop_zone").classList = ["drop_zone"]
+}
+    </script>
+  </body>
+</html>

@@ -1,0 +1,78 @@
+body {
+    font-size: 1rem;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    flex: 1;
+    margin: 0 auto;
+    max-width: 60rem;
+    padding: 0 0.5rem;
+  }
+  select, input, button {
+    padding: 0.3rem;
+    margin: 0.3rem;
+  }
+  
+  details {
+    border: 1px solid;
+    border-radius: 5px;
+    padding: 1rem;
+  }
+  summary {
+    font-weight: bold;
+  }
+  
+  
+  
+  #tooltip {
+    position: fixed;
+    display: inline-block;
+    background-color: bisque;
+    z-index: 1;
+    padding: 5px;
+    margin: 0 auto;
+  }
+  
+  .token:hover {
+    background-color:bisque;
+  }
+  .token_prob {
+    background-color:white;
+    text-align: center;
+    margin: 5px;
+    padding: 2px;
+    border: thin solid;
+    white-space: nowrap;
+    float: left;
+  }
+  
+  #completions_area {
+    border: 1px solid;
+    border-radius: 5px;
+    margin-bottom: 1rem;
+    padding: 1rem;
+    resize: both;
+    overflow: auto;
+    border: thin solid;
+    white-space: pre-wrap;
+    
+  }
+  
+  #model_info {
+    border: thin solid;
+    padding: 0.2rem;
+    margin: 0.2rem;
+    display: block;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    #tooltip {
+      background-color: indigo;
+    }
+    .token:hover {
+      background-color: indigo;
+    }
+    .token_prob {
+      background-color: indigo;
+    }
+  }

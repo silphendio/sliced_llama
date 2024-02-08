@@ -1,0 +1,11 @@
+{
+  "include": ["lib/**/*", "index.d.ts"],
+  "exclude": ["node_modules", "lib/**/*.test.*"],
+  "compilerOptions": {
+    "allowJs": true,
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "outDir": "types",
+    "declarationMap": true,
+  },
+}

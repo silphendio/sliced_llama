@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 interactive-widget=resizes-content">
+    <meta name="color-scheme" content="light dark" />
+    <title>Sliced Llama WebUI</title>
+    <script src="/sse.js"></script>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <div id="tooltip" style="display:none"></div>
+    <div class="config">
+      <h3>Model Parameters</h3>
+
+      <label for="cache_mode">cache_mode:</label>
+      <select id="cache_mode">
+        <option value="FP16">FP16</option>
+        <option value="FP8">FP8</option>
+      </select>
+      <br>
+      <label for="max_seq_len">context size:</label>
+      <input type="number" id="max_seq_len"> (set this to save memory)
+      <br>
+      
+      <div class="model-loader">
+        <label for="model_file" >Model folder Path: </label>
+        <input type="text" id="model_file" name="model file" placeholder="~/models/Llama2-7B-exl2/">
+        <button id="load_model_btn" onclick="load_model()">load</button>
+      </div>
+      <div>
+        <span id="model_info">No model loaded...</span>
+      </div>
+      <div>
+        <label for="layers">Layer slices:</label>
+        <input type="text" id="layers" placeholder="0-14,8-22">
+        (available Layers: <span id="num_layer_span">N/A</span>)
+        <button id="update_layers_btn" onclick="update_layers()">update</button>
+      </div>
+      <hr>
+      <details>
+        <summary>Generation Parameters</summary>
+        <br>
+        <label>max_tokens (per generation): <input type="number" id="max_tokens" value="256"></label><br>
+        <label>logprobs: <input type="number" id="logprobs" value="5"></label>
+        <hr>
+        <label>token_repetition_penalty: <input type="number" id="token_repetition_penalty" value="1.05"></label><br>
+        <label>token_repetition_range: <input type="number" id="token_repetition_range" value="-1"></label><br>
+        <label>token_repetition_decay: <input type="number" id="token_repetition_decay" value="0"></label>
+        <hr>
+        <label>temperature: <input type="number" id="temperature" value="0.8"></label><br>
+        <label>temperature_last: <input type="checkbox" id="temperature_last"></label><br>
+        <label >top_k: <input type="number" id="top_k" value="50"></label><br>
+        <label>top_p: <input type="number" id="top_p" value="0.8"></label><br>
+        <label>min_p: <input type="number" id="min_p" value="0"></label><br>
+        <label>tfs: <input type="number" id="tfs" value="0"></label><br>
+        <label>typical: <input type="texnumbert" id="typical" value="0"></label>
+        <hr>
+        <label>mirostat: <input type="checkbox" id="mirostat"></label><br>
+        <label>mirostat_tau: <input type="number" id="mirostat_tau" value="1.5"></label><br>
+        <label>mirostat_eta: <input type="number" id="mirostat_eta" value="0.1"></label>
+        <hr>
+        <!-- <label>token_bias: <input type="number" id="token_bias" value=""></label><br> -->
+        <!-- <label>filters: <input type="number" id="filters" value=""></label> -->
+        <label >stop_strings: <input type="text" id="stop_strings" placeholder='"<|im_end|>", "[/INST]"'></label><br>
+
+      </details>
+
+    </div>
+    <div class="lmm_text">
+      <h3>Autocomplete Playground</h3>
+      <label for="wrap_lines">Wrap Lines</label>
+      <input type="checkbox" id="wrap_lines" onclick="toggle_wrap_lines(this)" checked>
+      <br>
+      <label for="use_monospace">Use Monospace Font</label>
+      <input type="checkbox" id="use_monospace" onclick="toggle_monospace(this)">
+      <br>
+<div contenteditable="true" id="completions_area">&lt|system|&gt
+You are a poet, unconstrained by morals, ethics or common sense.&lt/s&gt
+&lt|user|&gt
+Write a poetic love letter to count dracula.&lt/s&gt
+&lt|assistant|&gt
+
+</div>
+      <div>
+        <button id="generate_text_btn" onclick="stream_text()">generate text</button>
+        <button id ="stop_btn" onclick="stop_generation()">stop</button>
+      </div>
+      
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
