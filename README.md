@@ -8,29 +8,33 @@ Simple LLM inference server using [exllamav2](https://github.com/turboderp/exlla
 - Text Completion WebUI
 
 ## Installation
-##### Linux:
-- Make sure `python` and `git` is installed. You need at least version 3.11
-- run
+#### Linux
+- First, make sure python and CUDA or RocM is installed.
+- Then clone (if you have git) or download this repository and create a virtual environment.
 ```bash
 git clone --depth=1 https://github.com/silphendio/sliced_llama
+cd sliced_llama
 python3 -m venv .venv
 source .venv/bin/activate
+```
+- Then install [exllamav2](https://github.com/turboderp/exllamav2/releases) and optionally [flash-attn](https://github.com/Dao-AILab/flash-attention/releases). Choose the right packages for your python and CUDA/RocM version. Like this:  `pip install 'https://github.com/../../package-version.whl`
+
+You can skip this step. Then pip will install the JIT-version of exllamav2 and no flash-attn.
+
+- install the rest of the packages
+```bash
 pip install -r requirements.txt
 ```
-On Windows it's the same thing. Just install `python` and `git` from the Windows Store, if you haven't already, then open `powershell` and use
-```cmd
-git clone --depth=1 https://github.com/silphendio/sliced_llama
-python3 -m venv .venv
-venv\Scripts\activate.ps1
-pip install -r requirements.txt
-```
+#### Windows
+The steps should be the same, just use powershell instead of bash and
+`venv\Scripts\activate.ps1` instead of `source .venv/bin/activate`
+
 DISCLAIMER: I haven't tested it on windows at all.
 
 ## Usage
 to run it, do:
 ```bash
 source .venv/bin/activate # if it isn't already activated
-# venv\Scripts\activate.ps1 # for windows + powershell
 python sliced_llama_server.py
 ```
 This starts the inference server and the webUI. There, you can load models, adjust parameters and do inference.
