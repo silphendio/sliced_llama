@@ -38,6 +38,9 @@ You can also use command line arguments, e.g.:
 ```
 python sliced_llama_server.py --model ~/path/to/llm-model-exl2/ --context-size 2048 --slices "0-24, 8-32"
 ```
+## WebUI Screenshot
+Light / Dark mode depends on system / browser settings
+![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
 
 As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
 
