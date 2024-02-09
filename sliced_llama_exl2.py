@@ -35,6 +35,7 @@ class SlicedLLamaExl2(SlicedLLama):
         if hasattr(self, 'model'):
             self.model.modules = self.original_modules
             self.model.unload()
+        self.cache = None
 
         try: model_path = urlparse(model_path).path
         except: pass

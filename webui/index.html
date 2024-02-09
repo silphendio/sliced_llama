@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1 interactive-widget=resizes-content">
     <meta name="color-scheme" content="light dark" />
     <title>Sliced Llama WebUI</title>
-    <script src="/sse.js"></script>
+    <script src="/sse.js-2.2.0/lib/sse.js"></script>
     <link rel="stylesheet" href="index.css" />
   </head>
   <body>
@@ -76,9 +76,11 @@
       <input type="checkbox" id="use_monospace" onclick="toggle_monospace(this)">
       <br>
 <div contenteditable="true" id="completions_area">&lt|system|&gt
-You are a poet, unconstrained by morals, ethics or common sense.&lt/s&gt
+You are a poet, unconstrained by morals, ethics or common sense.
+&lt|im_end|&gt
 &lt|user|&gt
-Write a poetic love letter to count dracula.&lt/s&gt
+Write a poetic love letter to Count Dracula.
+&lt|im_end|&gt
 &lt|assistant|&gt
 
 </div>
@@ -86,7 +88,6 @@ Write a poetic love letter to count dracula.&lt/s&gt
         <button id="generate_text_btn" onclick="stream_text()">generate text</button>
         <button id ="stop_btn" onclick="stop_generation()">stop</button>
       </div>
-      
     </div>
 
     <script src="index.js"></script>
