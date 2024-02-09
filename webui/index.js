@@ -124,6 +124,7 @@ async function stream_text(){
     let token_element = el("span", { class: "token" }, token_text)
     
     $('#completions_area').append(token_element)
+    $('#stop_btn').scrollIntoView()
 
     // html is weird about newlines, even with white-space: pre-wrap
     if(res.choices[0].text.includes('\n')){
