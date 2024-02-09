@@ -2,3 +2,4 @@ exllamav2>=0.0.13
 fastapi
 sse-starlette
 uvicorn
+tokenizers
