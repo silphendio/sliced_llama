@@ -46,9 +46,11 @@ python sliced_llama_server.py --model ~/path/to/llm-model-exl2/ --context-size 2
 Light / Dark mode depends on system / browser settings
 ![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
 
+## Compatibility with other apps:
 As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
 
-For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint. 
+
+- For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint. This will not give you many options, but if you change parameters in the WebUI, the inference server should remember them.
 
 ## TODO / missing features
 - configuration file
@@ -59,4 +61,4 @@ For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as co
   - `presency_penalty` and `frequency_penalty` aren't supported
   - authentication
   - usage statistics
-- compatibility with TabbyAPI
+- compatibility with TabbyAPI (For better SillyTavern integration)
