@@ -90,9 +90,6 @@ class SlicedLLamaExl2(SlicedLLama):
         self.generator.set_stop_conditions([self.tokenizer.eos_token_id])
         print("layers sucessfully rearranged!")
         ids = [id(x) for x in self.cache.key_states]
-        from collections import Counter
-        print(ids)
-        print(Counter(ids))
 
     
     def start_stream(self, prompt: str, stop_strings: list[str]=[], logprobs = 0, **kwargs):
