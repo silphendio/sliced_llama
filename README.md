@@ -1,13 +1,13 @@
 # sliced_llama
 Simple LLM inference server
 
-## Features:
+## Features
 - partly OpenAI-compatible API (this is a work in progress)
 - Layer Slicing: Basically instant Franken-self-merges. You don't even need to reload the model (just the cache).
 - Top Logprobs: See the top probabilities for each chosen token. This might help with adjusting sampler parameters.
 - Text Completion WebUI
 
-## Installation:
+## Installation
 ##### Linux:
 - Make sure `python` and `git` is installed. You need at least version 3.11
 - run
@@ -26,7 +26,7 @@ pip install -r requirements.txt
 ```
 DISCLAIMER: I haven't tested it on windows at all.
 
-## Usage:
+## Usage
 to run it, do:
 ```bash
 source .venv/bin/activate # if it isn't already activated
@@ -43,7 +43,7 @@ As an alternative to the webUI, the server can also connect to OpenAI-compatible
 
 For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint. 
 
-## TODO / missing features:
+## TODO / missing features
 - configuration file
 - LoRA support
 - Classifier Free Guidance
