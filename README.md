@@ -1,5 +1,5 @@
 # sliced_llama
-Simple LLM inference server
+Simple LLM inference server using [exllamav2](https://github.com/turboderp/exllamav2)
 
 ## Features
 - partly OpenAI-compatible API (this is a work in progress)
