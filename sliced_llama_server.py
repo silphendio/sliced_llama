@@ -1,3 +1,5 @@
+#!/usr/bin/env -S sh -c '"`dirname $0`/.venv/bin/python" "$0" "$@"'
+
 # run `uvicorn main:app --reload`
 import argparse
 import webbrowser
@@ -19,7 +21,8 @@ from sliced_llama_exl2 import SlicedLLamaExl2
 import serve_completions as compl
 import serve_chat_completions as chat_compl
 
-
+import sys
+basedir_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
 llm : SlicedLLama = SlicedLLamaExl2()
@@ -113,7 +116,7 @@ def kobold_cpp_tokencount(req):
 
 
 # Barebones WebUI
-app.mount("/", StaticFiles(directory="webui", html=True))
+app.mount("/", StaticFiles(directory= os.path.join(basedir_path, "webui"), html=True))
 
 
 
