@@ -38,6 +38,9 @@
         <button id="update_layers_btn" onclick="update_layers()">update</button>
       </div>
       <hr>
+      <label >Chat Template (for external chat apps):
+        <select name="chat_template_select" id="chat_template_select" onchange="switch_chat_template(this.value)"></select>
+      </label><br>
       <details>
         <summary>Generation Parameters</summary>
         <br>
@@ -63,7 +66,6 @@
         <!-- <label>token_bias: <input type="number" id="token_bias" value=""></label><br> -->
         <!-- <label>filters: <input type="number" id="filters" value=""></label> -->
         <label >stop_strings: <input type="text" id="stop_strings" placeholder='"<|im_end|>", "[/INST]"'></label><br>
-
       </details>
 
     </div>

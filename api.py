@@ -213,3 +213,10 @@ class ModelLoadResponse(BaseModel):
 
 class LayerRearrangeResponse(BaseModel):
     success: bool = True
+
+class TemplatesResponse(BaseModel):
+    object: str = "list"
+    data: list[str] = []
+
+class LoadTemplateRequest(BaseModel):
+    name: str

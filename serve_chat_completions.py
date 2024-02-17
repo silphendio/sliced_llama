@@ -4,15 +4,17 @@ from fastapi.encoders import jsonable_encoder
 from sse_starlette import EventSourceResponse
 from api import *
 from sliced_llama import SlicedLLama
-from fastapi import APIRouter
-
+from fastapi import APIRouter, HTTPException
 import jinja2
+import os
+
+template_folders = []
 
 llm : SlicedLLama
 
 jinja2_env = jinja2.Environment()
-chatml_template_string = "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% for message in messages %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}"
-chatml_template = jinja2_env.from_string(chatml_template_string)
+default_template_string = "{% if not add_generation_prompt is defined %}{% set add_generation_prompt = false %}{% endif %}{% for message in messages %}{{'<|im_start|>' + message['role'] + '\n' + message['content'] + '<|im_end|>' + '\n'}}{% endfor %}{% if add_generation_prompt %}{{ '<|im_start|>assistant\n' }}{% endif %}"
+chatml_template = jinja2_env.from_string(default_template_string)
 chatml_start_str = '<|im_start|>assisstant\n'
 chatml_stop_str = '<|im_end|>'
 
@@ -30,7 +32,7 @@ async def oai_chat_completions(req: ChatRequest)  -> ChatCompletion | EventSourc
     print("prompt in ChatML format:\n" + prompt + "\n")
 
     # update gen settings (TODO: do this properly?)
-    llm.gen_settings.__dict__ = dict(llm.gen_settings.__dict__,  **req.__dict__)
+    llm.gen_settings.__dict__ = dict(llm.gen_settings.__dict__,  **req.model_dump())
 
     # handle parameters
     stop_str = req.stop
@@ -81,3 +83,51 @@ async def oai_chat_completions(req: ChatRequest)  -> ChatCompletion | EventSourc
     
     else: # not streaming
         raise NotImplementedError # TODO
+
+# chat templates
+
+# file utils: these work with folders too
+def find_file(name: str, search_path: list[str] = [], ext: str = "") -> str | None:
+    if not name.endswith(ext):
+        name += ext
+    if os.path.exists(name):
+        return name
+    for folder in search_path:
+        if not os.path.isdir(folder): continue
+        for filename in os.listdir(folder):
+            if name == filename:
+                return os.path.join(folder, filename)
+
+def list_files(search_path: list[str], ext: str = ""):
+    results = []
+    for folder in search_path:
+        if not os.path.isdir(folder): continue
+        for filename in os.listdir(folder):
+            if filename.endswith(ext):
+                results.append(filename[:-len(ext)])
+    return results
+
+
+@router.get("/v1/templates")
+@router.get("/v1/template/list")
+async def get_templates()  -> TemplatesResponse:
+    print("template_folders", template_folders)
+    return TemplatesResponse(data= list_files(template_folders, ".jinja"))
+
+@router.post("/v1/template/switch")
+async def switch_template(req: LoadTemplateRequest):
+    global chatml_template
+    print(req.name, template_folders)
+    file_path = find_file(req.name, template_folders, ".jinja")
+    if file_path == None:
+        raise HTTPException(status_code=400, detail="template not found")
+    
+    with open(file_path, encoding="utf-8") as f:
+        template_str = f.read()
+        chatml_template = jinja2_env.from_string(template_str)
+
+
+@router.post("/v1/template/unload", description="This sets the template string to chatml")
+def unload_template():
+    global chatml_template
+    chatml_template = jinja2_env.from_string(default_template_string)

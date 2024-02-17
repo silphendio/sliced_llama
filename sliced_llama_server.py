@@ -31,6 +31,7 @@ server_port = 7777
 
 compl.llm = llm
 chat_compl.llm = llm
+chat_compl.template_folders = [os.path.join(basedir_path, "chat_templates")]
 
 
 # server stuff

@@ -15,7 +15,7 @@ async def oai_completions(req: CompletionRequest)  -> CompletionChoice | EventSo
     print("request received: ", req)
 
     # update gen settings (TODO: do this properly?)
-    llm.gen_settings.__dict__ = dict(llm.gen_settings.__dict__,  **req.__dict__)
+    llm.gen_settings.__dict__ = dict(llm.gen_settings.__dict__,  **req.model_dump())
 
     # handle parameters
     stop_str = req.stop

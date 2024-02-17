@@ -9,6 +9,7 @@ function el(name, attributes = {}, children = []){
 }
 
 update_model_info()
+update_chat_templates()
 
 
 
@@ -64,6 +65,30 @@ async function update_model_info(){
     // TODO: fetch & update generation parameters, used layers, ...
 
 }
+
+async function update_chat_templates(){
+  const res = await fetch('/v1/template/list').then(res => res.json())
+  $('#chat_template_select').innerHTML = ""
+    for(let name of res.data){
+      $('#chat_template_select').append(new Option(name, name))
+    }
+}
+
+async function on_select_chat_template(){
+
+}
+async function switch_chat_template(name){
+  console.log(name)
+  const response = fetch("/v1/template/switch", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      "name": name
+    })
+  })
+  response.then(res => console.log(res))
+}
+
 
 var event_source
 async function stream_text(){
