@@ -39,7 +39,9 @@ Light / Dark mode depends on system / browser settings
 As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
 
 
-- For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint. This will not give you many options, but if you change parameters in the WebUI, the inference server should remember them.
+- For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint.
+  This will not give you many options, but if you change parameters in the WebUI, the inference server should remember them.
+  You can select different chat templates in the WebUI. You can add more to the `chat_templates` folder.
 
 ## TODO / missing features
 In no particular order:
@@ -47,7 +49,7 @@ In no particular order:
 - LoRA support
 - Classifier Free Guidance
 - OpenAI API:
-  - chat completion currently only supports ChatML and only works with streaming
+  - chat completion currently only works with streaming
   - `presency_penalty` and `frequency_penalty` aren't supported
   - authentication
   - usage statistics
