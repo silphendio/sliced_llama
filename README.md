@@ -8,13 +8,13 @@ Simple LLM inference server using [exllamav2](https://github.com/turboderp/exlla
 - Text Completion WebUI
 
 ## Installation
-- Make sure python and CUDA or RocM is installed.
+- Make sure python and CUDA or RocM (Linux only) is installed.
 - Clone or download this repository.
-- Use the setup script. This creates a venv and picks the right requirements.txt file.
+- Use the setup script. This creates a venv and installs dependencies.
 ```bash
 git clone --depth=1 https://github.com/silphendio/sliced_llama
 cd sliced_llama
-./setup.py
+python ./setup.py
 ```
 
 DISCLAIMER: I haven't tested it on windows at all.
@@ -24,12 +24,13 @@ On Linux, just run it with
 ```bash
 ./sliced_llama_server.py
 ```
+On Windows, click `start.bat` instead. (It invokes `.venv\Scripts\python sliced_llama_server.py`)
+
 This starts the inference server and the webUI. There, you can load models, adjust parameters and do inference.
 You can also use command line arguments, e.g.:
 ```
 ./sliced_llama_server.py --model ~/path/to/llm-model-exl2/ --context-size 2048 --slices "0-24, 8-32"
 ```
-The shebang probably doesn't work on Windows, so you have to use `.venv/bin/python sliced_llama_server.py` instead.
 
 ## WebUI Screenshot
 Light / Dark mode depends on system / browser settings
@@ -39,7 +40,7 @@ Light / Dark mode depends on system / browser settings
 As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
 
 
-- For SillyTavern, select chat completion, and use `http://0.0.0.0:57593/v1` as costum endpoint.
+- For SillyTavern, select chat completion, and use `http://127.0.0.1:57593/v1` as costum endpoint.
   This will not give you many options, but if you change parameters in the WebUI, the inference server should remember them.
   You can select different chat templates in the WebUI. You can add more to the `chat_templates` folder.
 
