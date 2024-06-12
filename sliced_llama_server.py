@@ -26,8 +26,8 @@ basedir_path = os.path.abspath(os.path.dirname(sys.argv[0]))
 
 
 llm : SlicedLLama = SlicedLLamaExl2()
-server_host = '0.0.0.0'
-server_port = 7777
+server_host = '127.0.0.1'
+server_port = 57593
 
 compl.llm = llm
 chat_compl.llm = llm
@@ -136,7 +136,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-m", "--model", help="path to exl2 folder")
     parser.add_argument("-c", "--cache-mode", help="FP8 or FP16", default="FP16")
-    parser.add_argument("-p", "--port", help="A unique number below 65535", type=int, default=57593)
+    parser.add_argument("-p", "--port", help="A unique number below 65535", type=int, default=server_port)
     parser.add_argument("-s", "--slices", help="layers to use, e.g.: '0-24, 8-32'")
     parser.add_argument("-l", "--max-seq-len", "--context-size", help="context size, a lower number saves VRAM", type=int)
     args = parser.parse_args()
