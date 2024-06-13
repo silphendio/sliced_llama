@@ -3,14 +3,14 @@ SlicedLlama is AI text generation software powered by [exllamav2](https://github
 It runs large language models (LLMs) and offers an interface to generate text, adjust model parameters, and modify the model on the fly by rearranging layers.
 A webUI is included, but it's also a server compatible with other LLM GUIs.
 
+![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
+
+
 ## Features
 - Text Completion WebUI
 - partly OpenAI-compatible API (this is a work in progress)
 - Layer Slicing: Basically instant Franken-self-merges. You don't even need to reload the model (just the cache).
 - Top Logprobs: See the top probabilities for each chosen token. This might help with adjusting sampler parameters.
-
-![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
-(Light / Dark mode depends on system / browser settings)
 
 
 ## Installation
