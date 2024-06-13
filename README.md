@@ -8,7 +8,7 @@ Simple LLM inference server using [exllamav2](https://github.com/turboderp/exlla
 - Text Completion WebUI
 
 ## Installation
-- Make sure python and CUDA or RocM (Linux only) is installed.
+- Make sure python  is installed, and a CUDA or RocM (Linux only) compatible GPU driver.
 - Clone or download this repository.
 - Use the setup script. This creates a venv and installs dependencies.
 ```bash
