@@ -31,6 +31,10 @@ You can also use command line arguments, e.g.:
 ```
 ./sliced_llama_server.py --model ~/path/to/llm-model-exl2/ --context-size 2048 --slices "0-24, 8-32"
 ```
+Currently only exl2 models are supported. You can get them from [huggingface](https://huggingface.co/models?sort=trending&search=exl2).
+Make sure that the model fits into VRAM, with some extra memory depending on `(context size)² * (number of layers)`, where context size is the number of tokens the model can remember.
+
+The WebUI currently only supports text completion, so you need to do the prompt formatting yourself. Each model has its preferred prompt format, so look it up.
 
 ## WebUI Screenshot
 Light / Dark mode depends on system / browser settings
