@@ -1,6 +1,4 @@
 #!/usr/bin/env python3
-print("jhlknkjfdydö.nbkljynh")
-
 from subprocess import run
 import sys
 import os
@@ -9,7 +7,6 @@ import os
 python_cmds = ["python", "python3", "py"]
 print("creating virtual environment...")
 for cmd in python_cmds:
-    print("try cmd: ", cmd)
     if os.path.isdir(".venv"):
         break
     try:
@@ -20,7 +17,6 @@ if not os.path.isdir(".venv"):
 
 
 # determine platform
-
 exl2_version = "0.1.5"
 torch_str = "torch2.3.1"
 torch_str_fa_linux = "torch2.3"
@@ -33,7 +29,7 @@ py_str = "cp" + ''.join(sys.version.split(".")[:2])
 gpu_str = "" # CUDA or ROCm versions
 os_str = "" #"win_amd64" or "linux_x86_64"
 
-# gpu_str
+# check for CUDA or ROCm
 try:
     a = run("nvidia-smi", capture_output=True)
     if b'CUDA Version: 12' in a.stdout:
@@ -53,7 +49,7 @@ except:
     except:
         print("no CUDA or ROCm found")
 
-# os_str
+# determine OS
 if sys.platform == 'win32':
     os_str = "win_amd64"
 if sys.platform == 'linux':
@@ -90,18 +86,9 @@ if gpu_str.startswith("cu") :
 
 pip_cmd = "./.venv/Scripts/pip" if sys.platform == 'win32' else "./.venv/bin/pip"
 
-# torch is special
+# pytorch
 if gpu_str.startswith("cu") or os_str == "linux_x86_64":
     run([pip_cmd, "install", "torch", "--index-url", f"https://download.pytorch.org/whl/{gpu_str}"])
 
 for req in requirements:
     run([pip_cmd, "install", req])
-
-
-
-# flash_attn wheel
-
-# windows
-fa_version = "2.5.9.post1"
-torch_str = "torch2.3"
-
