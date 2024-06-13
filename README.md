@@ -1,11 +1,17 @@
 # sliced_llama
-Simple LLM inference server using [exllamav2](https://github.com/turboderp/exllamav2)
+SlicedLlama is AI text generation software powered by [exllamav2](https://github.com/turboderp/exllamav2).
+It runs large language models (LLMs) and offers an interface to generate text, adjust model parameters, and modify the model on the fly by rearranging layers.
+A webUI is included, but it's also a server compatible with other LLM GUIs.
 
 ## Features
+- Text Completion WebUI
 - partly OpenAI-compatible API (this is a work in progress)
 - Layer Slicing: Basically instant Franken-self-merges. You don't even need to reload the model (just the cache).
 - Top Logprobs: See the top probabilities for each chosen token. This might help with adjusting sampler parameters.
-- Text Completion WebUI
+
+![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
+(Light / Dark mode depends on system / browser settings)
+
 
 ## Installation
 - Make sure python  is installed, and a CUDA or RocM (Linux only) compatible GPU driver.
@@ -35,10 +41,6 @@ Currently only exl2 models are supported. You can get them from [huggingface](ht
 Make sure that the model fits into VRAM, with some extra memory depending on `(context size)² * (number of layers)`, where context size is the number of tokens the model can remember.
 
 The WebUI currently only supports text completion, so you need to do the prompt formatting yourself. Each model has its preferred prompt format, so look it up.
-
-## WebUI Screenshot
-Light / Dark mode depends on system / browser settings
-![Screenshot](https://raw.githubusercontent.com/silphendio/sliced_llama/main/screenshots/webui_screenshot.png)
 
 ## Compatibility with other apps:
 As an alternative to the webUI, the server can also connect to OpenAI-compatible GUIs like [Mikupad](https://github.com/lmg-anon/mikupad) or [SillyTavern](https://github.com/SillyTavern/SillyTavern).
